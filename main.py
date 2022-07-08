@@ -24,7 +24,7 @@ print(f"\n--- SAVE FOLDER ---\n{folder_name}")
 
 print("\n--- START UNPACK ---")
 try:
-    call = f"(cd 'C:/Program Files/gtautil-2.2.7') -and (./gtautil extractarchive --input '{rpf_path}' --output '{output_path}')"
+    call = f"(cd 'C:/Program Files/gtautil-2.2.7') ; (./gtautil extractarchive --input '{rpf_path}' --output '{output_path}')"
     subprocess.run(['powershell', call])
 except Exception as e:
     print(f"Something bad happened:\n{e}")
