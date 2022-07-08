@@ -149,7 +149,7 @@ if change_name.lower() == "y":
                 else:
                     os.rename(os.path.join(root, file), os.path.join(root, file.replace(vehicle_name, new_name)))
 
-    if warnings == []:
+    if not warnings:
         print("\nNo warnings\n")
     else:
         print("\n{}\n".format("\n".join(warnings)))  # no escape characters in f-string )-;
