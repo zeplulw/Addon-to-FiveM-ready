@@ -1,10 +1,19 @@
+'''
+Author: Ben (https://zeplul.me)
+Description: Converts a GTAV addon asset to a FiveM ready one
+Date: 2022-07-08
+Version: 1.0.3
+
+GitHub: https://github.com/zeplulw/Addon-to-FiveM-ready/
+'''
+
 import tkinter, os, datetime, shutil, random, subprocess
 import xml.etree.ElementTree as ET
 from tkinter import filedialog
 tkinter.Tk().withdraw()
 
-print("Select .RPF file to convert")
-rpf_path = tkinter.filedialog.askopenfilename(title="Select RPF file", filetypes=[("RPF files", "*.rpf")])
+print("Created by zep#0012 for use anywhere. No license of any kind\n\nSelect .RPF file to convert")
+rpf_path = filedialog.askopenfilename(title="Select RPF file", filetypes=[("RPF files", "*.rpf")])
 print(f"\n--- RPF PATH ---\n{rpf_path}")
 
 folder_name = f"rpf-convert_{datetime.datetime.now().strftime('%H-%M-%S')}"
