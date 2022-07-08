@@ -1,4 +1,9 @@
-# Addon file => FiveM Ready
+<p align="center">
+  <img width=128 src="https://cdn.zeplul.me/favicon.ico"><br>
+</p>
+
+<h1 align="center">GTAV Addon → FiveM ready</h1>
+
 Converts a 'dlc.rpf' GTAV addon file to a FiveM ready one, separating data and stream files into separate folders. Also offers the option to customize the spawncode and the in-game name
 
 
