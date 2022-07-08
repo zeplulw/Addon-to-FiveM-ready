@@ -1,4 +1,4 @@
-import tkinter, os, datetime, shutil, random
+import tkinter, os, datetime, shutil, random, subprocess
 import xml.etree.ElementTree as ET
 from tkinter import filedialog
 tkinter.Tk().withdraw()
@@ -10,12 +10,16 @@ print(f"\n--- RPF PATH ---\n{rpf_path}")
 folder_name = f"rpf-convert_{datetime.datetime.now().strftime('%H-%M-%S')}"
 output_path = os.path.join(os.path.dirname(rpf_path), folder_name)
 os.mkdir(output_path)
-
 print(f"\n--- SAVE FOLDER ---\n{folder_name}")
+
+
 
 print("\n--- START UNPACK ---")
 try:
-    os.system(f"gtautil extractarchive --input \"{rpf_path}\" --output \"{output_path}\"")
+    # separated into two because PowerShell is fucking stupid and doesnt understand basic fucking sense (i spend a little time on this :D)
+    call = "cd 'C:/Program Files/gtautil-2.2.7';"
+    call2 = f"gtautil extractarchive --input '{rpf_path}' --output '{output_path}'"
+    subprocess.run(['powershell', call, call2])
 except Exception as e:
     print(f"Something bad happened:\n{e}")
 
