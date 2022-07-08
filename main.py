@@ -138,13 +138,13 @@ if change_name.lower() == "y":
                         try:
                             os.rename(os.path.join(root, file),
                                       os.path.join(root, file.replace(vehicle_name, new_name)))
-                        except:
+                        except FileExistsError:
                             pass
                     elif f_name.endswith("+hi"):
                         try:
                             os.rename(os.path.join(root, file),
                                       os.path.join(root, file.replace(vehicle_name, new_name)))
-                        except:
+                        except FileExistsError:
                             pass
                 else:
                     os.rename(os.path.join(root, file), os.path.join(root, file.replace(vehicle_name, new_name)))
