@@ -67,9 +67,9 @@ for root, dirs, files in os.walk(root_path):
     for file in files:
         if not file.endswith((".meta", ".ytd", ".yft", ".ydr", ".png", ".dds", ".bmp", ".jpg", ".jpeg")):
             os.remove(os.path.join(root, file))
-    for dir in dirs:
-        if dir not in ("tmp_data", "tmp_stream"):
-            shutil.rmtree(os.path.join(root, dir))
+    for dir_ in dirs:
+        if dir_ not in ("tmp_data", "tmp_stream"):
+            shutil.rmtree(os.path.join(root, dir_))
 
 print("\n--- DELETED ORIGINAL FOLDERS/FILES ---")
 
