@@ -18,7 +18,7 @@ print("\n--- START UNPACK ---")
 try:
     # separated into two because PowerShell is fucking stupid and doesnt understand basic fucking sense (i spend a little time on this :D)
     call = "cd 'C:/Program Files/gtautil-2.2.7';"
-    call2 = f"gtautil extractarchive --input '{rpf_path}' --output '{output_path}'"
+    call2 = f".\gtautil extractarchive --input '{rpf_path}' --output '{output_path}'"
     subprocess.run(['powershell', call, call2])
 except Exception as e:
     print(f"Something bad happened:\n{e}")
