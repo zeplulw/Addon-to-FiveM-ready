@@ -10,6 +10,7 @@ GitHub: https://github.com/zeplulw/Addon-to-FiveM-ready/
 import tkinter, os, datetime, shutil, random, subprocess
 import xml.etree.ElementTree as ET
 from tkinter import filedialog
+
 tkinter.Tk().withdraw()
 
 print("Created by zep#0012 for use anywhere. No license of any kind\n\nSelect .RPF file to convert")
@@ -21,11 +22,10 @@ output_path = os.path.join(os.path.dirname(rpf_path), folder_name)
 os.mkdir(output_path)
 print(f"\n--- SAVE FOLDER ---\n{folder_name}")
 
-
-
 print("\n--- START UNPACK ---")
 try:
-    # separated into two because PowerShell is fucking stupid and doesnt understand basic fucking sense (i spend a little time on this :D)
+    # separated into two because PowerShell is fucking stupid and doesnt understand basic fucking sense (i spend a
+    # little time on this :D)
     call = "cd 'C:/Program Files/gtautil-2.2.7';"
     call2 = f".\gtautil extractarchive --input '{rpf_path}' --output '{output_path}'"
     subprocess.run(['powershell', call, call2])
@@ -67,16 +67,17 @@ for root, dirs, files in os.walk(root_path):
     for file in files:
         if not file.endswith((".meta", ".ytd", ".yft", ".ydr", ".png", ".dds", ".bmp", ".jpg", ".jpeg")):
             os.remove(os.path.join(root, file))
-    for dir in dirs:
-        if dir not in ("tmp_data", "tmp_stream"):
-            shutil.rmtree(os.path.join(root, dir))
+    for dir_ in dirs:
+        if dir_ not in ("tmp_data", "tmp_stream"):
+            shutil.rmtree(os.path.join(root, dir_))
 
 print("\n--- DELETED ORIGINAL FOLDERS/FILES ---")
 
 os.rename(os.path.join(root_path, "tmp_data"), os.path.join(root_path, "data"))
 os.rename(os.path.join(root_path, "tmp_stream"), os.path.join(root_path, "stream"))
 
-vehicle_name = ET.parse(os.path.join(root_path, "data", "vehicles.meta")).getroot().find("InitDatas").find("Item").find("modelName").text
+vehicle_name = ET.parse(os.path.join(root_path, "data", "vehicles.meta")).getroot().find("InitDatas").find("Item") \
+    .find("modelName").text
 
 print(f"\nSuccessfully converted '{vehicle_name}' to FiveM ready")
 
@@ -118,7 +119,8 @@ if change_name.lower() == "y":
                 f_root.find("HandlingData").find("Item").find("handlingName").text = new_name
                 if float(f_root.find("HandlingData").find("Item").find("fMass").attrib['value']) > 5000:
                     warnings.append("!!! WARNING: The mass of this vehicle is abnormally high (>5000) !!!")
-                if "CSpecialFlightHandlingData" in f_root.find("HandlingData").find("Item").find("SubHandlingData").findall("Item"):
+                if "CSpecialFlightHandlingData" in f_root.find("HandlingData").find("Item").find("SubHandlingData") \
+                        .findall("Item"):
                     warnings.append("!!!WARNING: This vehicle has special flight handling !!!")
 
             # gta is picky so i write it in binary mode
@@ -134,21 +136,22 @@ if change_name.lower() == "y":
                 if len(f_name) != len(vehicle_name):
                     if f_name.endswith("_hi"):
                         try:
-                            os.rename(os.path.join(root, file), os.path.join(root, file.replace(vehicle_name, new_name)))
-                        except:
+                            os.rename(os.path.join(root, file),
+                                      os.path.join(root, file.replace(vehicle_name, new_name)))
+                        except FileExistsError:
                             pass
                     elif f_name.endswith("+hi"):
                         try:
-                            os.rename(os.path.join(root, file), os.path.join(root, file.replace(vehicle_name, new_name)))
-                        except:
+                            os.rename(os.path.join(root, file),
+                                      os.path.join(root, file.replace(vehicle_name, new_name)))
+                        except FileExistsError:
                             pass
                 else:
                     os.rename(os.path.join(root, file), os.path.join(root, file.replace(vehicle_name, new_name)))
-                        
-                        
-    if warnings == []:
+
+    if not warnings:
         print("\nNo warnings\n")
     else:
-        print("\n{}\n".format("\n".join(warnings))) # no escape characters in f-string )-;
+        print("\n{}\n".format("\n".join(warnings)))  # no escape characters in f-string )-;
 
     input(f"Successfully converted '{vehicle_name}' to '{new_name}'! Press enter to exit...")
